@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { fabric } from "fabric";
 
-export default function Canvas({ img }) {
+export default function Canvas({ img, setCanvas }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -12,6 +12,8 @@ export default function Canvas({ img }) {
       fabricCanvas?.setWidth(fabricImg.width);
       fabricCanvas?.setBackgroundImage(fabricImg);
     });
+
+    setCanvas(fabricCanvas);
 
     return () => fabricCanvas?.dispose();
   }, []);
