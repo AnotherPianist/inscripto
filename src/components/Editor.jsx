@@ -15,10 +15,18 @@ export default function Editor({ img }) {
     canvas.renderAll();
   }
 
+  function handleDownload(params) {
+    const a = document.createElement("a");
+    a.href = canvas?.toDataURL({ format: "png" });
+    a.download = "image.png";
+    a.click();
+  }
+
   return (
     <>
       <Canvas img={img} setCanvas={setCanvas} />
       <button onClick={addText}>Add text</button>
+      <button onClick={handleDownload}>Download</button>
     </>
   );
 }
