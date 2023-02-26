@@ -1,7 +1,9 @@
 export default function LoadImage({ handleImgChange }) {
   return (
     <div className="flex flex-col items-center rounded-lg bg-white bg-opacity-80 bg-clip-padding px-24 py-10 ring-1 ring-gray-900/5 drop-shadow-2xl backdrop-blur-xl">
-      <h1 className="my-6 text-6xl font-semibold text-violet-500">Inscripto</h1>
+      <h1 className="my-6 text-6xl font-semibold text-violet-500">
+        ✏️ Inscripto 🖼️
+      </h1>
       <p className="my-4 text-2xl text-violet-400">
         Upload an image to get started
       </p>

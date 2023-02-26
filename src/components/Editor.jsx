@@ -79,7 +79,9 @@ export default function Editor({ img }) {
   return (
     <div className="flex h-screen w-screen flex-col items-center">
       <header className="my-4">
-        <h1 className="text-4xl font-semibold text-violet-500">Inscripto</h1>
+        <h1 className="text-4xl font-semibold text-violet-500">
+          ✏️ Inscripto 🖼️
+        </h1>
       </header>
       <main className="flex w-full flex-1 flex-row items-center justify-evenly">
         <Canvas img={img} setCanvas={setCanvas} />

@@ -41,7 +41,7 @@ export default function DataOptions({
             onClick={handleDownload}
             className="mt-4 rounded-full border-0 bg-violet-100 py-2 px-4 font-semibold text-violet-600 duration-300 hover:bg-violet-200"
           >
-            Download Images
+            Download Images 🪄
           </button>
         </>
       ) : (
