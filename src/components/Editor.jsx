@@ -11,10 +11,17 @@ export default function Editor({ img }) {
   const textboxes = useRef({});
 
   const newTextboxOptions = i => ({
-    top: i * 20,
+    top: i * 20 + 20,
     fontFamily: "Arial",
     fontSize: 16,
-    fill: "#000000"
+    fill: "#000000",
+    lockScalingY: true,
+    textAlign: "center",
+    textTruncate: true,
+    editable: false,
+    originX: "center",
+    originY: "center",
+    width: canvas.width * 0.8
   });
 
   useEffect(() => {
@@ -29,6 +36,7 @@ export default function Editor({ img }) {
         _textboxesData[label] = options;
         textboxes.current[label] = newTextbox;
         canvas?.add(newTextbox);
+        canvas.viewportCenterObjectH(newTextbox);
       });
 
       setTextboxesData(_textboxesData);
