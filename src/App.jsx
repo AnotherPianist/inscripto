@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import LoadImage from "./components/LoadImage";
 import Editor from "./components/Editor";
 
@@ -11,13 +10,15 @@ function App() {
   }
 
   return (
-    <main>
+    <div className="flex h-screen flex-col items-center justify-center">
+      <div className="absolute inset-0 -z-20 bg-[url(/src/assets/beams.jpg)] bg-center" />
+      <div className="absolute inset-0 -z-10 bg-[url(/src/assets/grid.svg)] bg-center" />
       {img ? (
         <Editor img={img} />
       ) : (
         <LoadImage handleImgChange={handleImgChange} />
       )}
-    </main>
+    </div>
   );
 }
 

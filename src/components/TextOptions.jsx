@@ -1,6 +1,7 @@
 export default function TextOptions({ label, textboxData, onChange }) {
   return (
     <>
+      <p>{label}</p>
       <select
         name="fontFamily"
         value={textboxData.fontFamily}
