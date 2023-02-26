@@ -1,3 +1,5 @@
+import { saveAs } from "file-saver";
+import JSZip from "jszip";
 import { useEffect, useRef, useState } from "react";
 import Canvas from "./Canvas";
 import DataOptions from "./DataOptions";
@@ -52,13 +54,18 @@ export default function Editor({ img }) {
   }
 
   function handleDownload() {
-    const a = document.createElement("a");
+    var zip = new JSZip();
+    const sep = "base64,";
+    let dataURL;
     data.forEach((entry, i) => {
       changeTexts(entry);
-      a.href = canvas?.toDataURL({ format: "png" });
-      a.download = `image${i}.png`;
-      a.click();
+      dataURL = canvas.toDataURL({ format: "png" });
+      dataURL = dataURL.substring(dataURL.indexOf(sep) + sep.length);
+      zip.file(`${i}.png`, dataURL, { base64: true });
     });
+    zip
+      .generateAsync({ type: "blob" })
+      .then(content => saveAs(content, "images.zip"));
   }
 
   return (
