@@ -1,4 +1,4 @@
-export default function TextOptions({ label, textboxData, onChange }) {
+export default function TextOptions({ label, textboxData, onChange, fonts }) {
   return (
     <div className="flex flex-col gap-2 p-4">
       <p className="ml-2 text-violet-500">{label}</p>
@@ -9,10 +9,11 @@ export default function TextOptions({ label, textboxData, onChange }) {
           onChange={onChange}
           className="h-10 rounded-md bg-violet-100 p-2 text-violet-600 duration-300 hover:bg-violet-200"
         >
-          <option value="Arial">Arial</option>
-          <option value="Courier New">Courier New</option>
-          <option value="Times New Roman">Times New Roman</option>
-          <option value="Verdana">Verdana</option>
+          {fonts.map(font => (
+            <option key={font} value={font}>
+              {font}
+            </option>
+          ))}
         </select>
         <input
           type="number"

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadData from "./LoadData";
 import TextOptions from "./TextOptions";
+import fontFamilies from "../fontFamilies";
 
 export default function DataOptions({
   textboxesData,
@@ -9,6 +10,11 @@ export default function DataOptions({
   handleDownload
 }) {
   const [dataLoaded, setDataLoaded] = useState(false);
+  const [fonts, setFonts] = useState([]);
+
+  useEffect(() => {
+    setFonts(fontFamilies);
+  }, []);
 
   function loadData(data) {
     setData(data);
@@ -28,6 +34,7 @@ export default function DataOptions({
               label={label}
               textboxData={textboxData}
               onChange={e => onChange(e, label)}
+              fonts={fonts}
             />
           ))}
           <button
