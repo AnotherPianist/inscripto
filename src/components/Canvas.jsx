@@ -18,5 +18,9 @@ export default function Canvas({ img, setCanvas }) {
     return () => fabricCanvas?.dispose();
   }, []);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <div className="h-fit w-fit bg-white shadow-2xl ring-1 ring-gray-900/5">
+      <canvas ref={canvasRef} />
+    </div>
+  );
 }
