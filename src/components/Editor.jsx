@@ -44,11 +44,21 @@ export default function Editor({ img }) {
     canvas.renderAll();
   }
 
+  function changeTexts(entry) {
+    Object.entries(entry).forEach(([label, text]) =>
+      textboxes.current[label].set("text", text)
+    );
+    canvas.renderAll();
+  }
+
   function handleDownload() {
     const a = document.createElement("a");
-    a.href = canvas?.toDataURL({ format: "png" });
-    a.download = "image.png";
-    a.click();
+    data.forEach((entry, i) => {
+      changeTexts(entry);
+      a.href = canvas?.toDataURL({ format: "png" });
+      a.download = `image${i}.png`;
+      a.click();
+    });
   }
 
   return (
