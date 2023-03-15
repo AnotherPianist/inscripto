@@ -21,7 +21,8 @@ export default function Editor({ img }) {
     editable: false,
     originX: "center",
     originY: "center",
-    width: canvas.width * 0.8
+    width: canvas.width * 0.8,
+    visible: true
   });
 
   useEffect(() => {
