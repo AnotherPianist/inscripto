@@ -22,7 +22,7 @@ export default function DataOptions({
   }
 
   return (
-    <div className="flex max-w-[30%] flex-col items-center gap-4 rounded-lg bg-white py-10 px-6 shadow-2xl">
+    <div className="flex flex-col items-center gap-4 rounded-lg bg-white py-10 px-6 shadow-2xl">
       {dataLoaded ? (
         <>
           <h4 className="text-2xl font-semibold text-violet-500">
