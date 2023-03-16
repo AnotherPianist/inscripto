@@ -7,8 +7,11 @@ import DataOptions from "./DataOptions";
 export default function Editor({ img }) {
   const [canvas, setCanvas] = useState(null);
   const [data, setData] = useState([]);
+  const [images, setImages] = useState({});
+  const [filenamesLabel, setFilenamesLabel] = useState("");
   const [textboxesData, setTextboxesData] = useState({});
   const textboxes = useRef({});
+  const fabricImage = useRef(null);
 
   const newTextboxOptions = i => ({
     top: i * 20 + 20,
@@ -45,6 +48,16 @@ export default function Editor({ img }) {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (Object.keys(images).length !== 0) {
+      new fabric.Image.fromURL(images[data[0][filenamesLabel]], img => {
+        fabricImage.current = img;
+        canvas.add(img);
+        canvas.renderAll();
+      });
+    }
+  }, [images]);
+
   function handleTextOptionsChange(e, label) {
     const { name, value } = e.target;
     setTextboxesData(prev => ({
@@ -62,16 +75,31 @@ export default function Editor({ img }) {
     canvas.renderAll();
   }
 
-  function handleDownload() {
+  function changeImage(entry) {
+    const imageSrc = images[entry[filenamesLabel]];
+
+    return new Promise(resolve => {
+      fabricImage.current.setSrc(imageSrc, () => {
+        canvas.renderAll();
+        resolve();
+      });
+    });
+  }
+
+  async function handleDownload() {
     var zip = new JSZip();
     const sep = "base64,";
     let dataURL;
-    data.forEach((entry, i) => {
-      changeTexts(entry);
+
+    for (let i = 0; i < data.length; i++) {
+      changeTexts(data[i]);
+      if (Object.keys(images).length !== 0) await changeImage(data[i]);
+
       dataURL = canvas.toDataURL({ format: "png" });
       dataURL = dataURL.substring(dataURL.indexOf(sep) + sep.length);
-      zip.file(`${i}.png`, dataURL, { base64: true });
-    });
+      zip.file(`image${i}.png`, dataURL, { base64: true });
+    }
+
     zip
       .generateAsync({ type: "blob" })
       .then(content => saveAs(content, "images.zip"));
@@ -88,6 +116,9 @@ export default function Editor({ img }) {
         <Canvas img={img} setCanvas={setCanvas} />
         <DataOptions
           setData={setData}
+          setImages={setImages}
+          filenamesLabel={filenamesLabel}
+          setFilenamesLabel={setFilenamesLabel}
           textboxesData={textboxesData}
           onChange={handleTextOptionsChange}
           handleDownload={handleDownload}

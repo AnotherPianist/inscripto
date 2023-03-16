@@ -4,15 +4,27 @@ import {
   Bars3BottomRightIcon
 } from "@heroicons/react/20/solid";
 
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, EyeSlashIcon, PhotoIcon } from "@heroicons/react/24/outline";
 
-export default function TextOptions({ label, textboxData, onChange, fonts }) {
+export default function TextOptions({
+  label,
+  filenamesLabel,
+  setFilenamesLabel,
+  textboxData,
+  onChange,
+  fonts
+}) {
   function handleTextAlignChange(value) {
     onChange({ target: { name: "textAlign", value: value } });
   }
 
   function toggleVisibility() {
     onChange({ target: { name: "visible", value: !textboxData.visible } });
+  }
+
+  function handleSetAsFilenames() {
+    toggleVisibility();
+    setFilenamesLabel(label);
   }
 
   return (
@@ -27,6 +39,11 @@ export default function TextOptions({ label, textboxData, onChange, fonts }) {
               <EyeSlashIcon className="h-6 w-6 text-violet-500" />
             )}
           </button>
+          {filenamesLabel === "" && (
+            <button onClick={handleSetAsFilenames}>
+              <PhotoIcon className="h-6 w-6 text-violet-500" />
+            </button>
+          )}
           <div className="flex flex-row">
             <button
               className={`flex h-8 w-8 items-center justify-center rounded-sm ${
