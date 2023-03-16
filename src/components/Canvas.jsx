@@ -13,12 +13,12 @@ export default function Canvas({ img, setCanvas }) {
       fabricCanvas?.setBackgroundImage(fabricImg);
       fabricCanvas.selection = false;
       fabricCanvas.on("object:moving", options => {
-        if (options.target && options.target.type === "textbox") {
-          const textbox = options.target;
+        if (options.target) {
+          const element = options.target;
           const canvasCenterX = fabricCanvas.width / 2;
-          const textboxCenterX = textbox.left; // It's the center when originX attribute is set to "center"
+          const textboxCenterX = element.left; // It's the center when originX attribute is set to "center"
           const distanceFromCenter = Math.abs(canvasCenterX - textboxCenterX);
-          if (distanceFromCenter <= 5) textbox.set({ left: canvasCenterX });
+          if (distanceFromCenter <= 5) element.set({ left: canvasCenterX });
         }
       });
     });

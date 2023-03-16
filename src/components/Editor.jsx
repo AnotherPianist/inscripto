@@ -28,6 +28,12 @@ export default function Editor({ img }) {
     visible: true
   });
 
+  const newImageOptions = {
+    lockScalingFlip: true,
+    originX: "center",
+    originY: "center"
+  };
+
   useEffect(() => {
     if (data.length !== 0) {
       const _textboxesData = {};
@@ -50,11 +56,21 @@ export default function Editor({ img }) {
 
   useEffect(() => {
     if (Object.keys(images).length !== 0) {
-      new fabric.Image.fromURL(images[data[0][filenamesLabel]], img => {
-        fabricImage.current = img;
-        canvas.add(img);
-        canvas.renderAll();
-      });
+      new fabric.Image.fromURL(
+        images[data[0][filenamesLabel]],
+        img => {
+          img.setControlsVisibility({
+            mt: false,
+            mr: false,
+            mb: false,
+            ml: false
+          });
+          fabricImage.current = img;
+          canvas.add(img);
+          canvas.renderAll();
+        },
+        newImageOptions
+      );
     }
   }, [images]);
 
